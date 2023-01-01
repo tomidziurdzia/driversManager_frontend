@@ -32,6 +32,7 @@ const App = () => {
         ) : (
           <>
             {/* Area Privada */}
+            {/* Probando GIT de Front */}
             <Route path="/*" element={<ProtectedRoute />} />
             <Route path="/*" element={<Navigate to="/" />} />
           </>
