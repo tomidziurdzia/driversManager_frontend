@@ -69,9 +69,25 @@ const TravelList = ({ travel }) => {
                 <p className="w-full text-center">{travel?.trips}</p>
               </div>
             </div>
-            <div className="flex justify-center">
-              <p className="p-2">Total</p>
-              <p className="p-2">{formatearCantidad(total)}</p>
+            <div
+              className={`${
+                travel.platform.name && "grid grid-cols-2 mt-2"
+              } m-auto gap-4 text-center w-full`}
+            >
+              {travel.platform.name && (
+                <div>
+                  <p>Platform</p>
+                  <p>{travel.platform.name}</p>
+                </div>
+              )}
+              <div
+                className={`${
+                  !travel.platform.name && "flex mt-2 justify-center gap-4"
+                }`}
+              >
+                <p>Total</p>
+                <p>{formatearCantidad(total)}</p>
+              </div>
             </div>
           </div>
         )}

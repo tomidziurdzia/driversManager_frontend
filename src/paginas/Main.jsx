@@ -12,6 +12,7 @@ import { viewPlatforms } from "../store/platform/thunks";
 import { viewTravels } from "../store/travel/thunks";
 import { viewVehicles } from "../store/vehicle/thunks";
 import ModalVehicleForm from "../components/ModalVehicleForm";
+import { Link } from "react-router-dom";
 
 const Main = () => {
   const { platforms } = useSelector((state) => state.platform);
@@ -39,7 +40,12 @@ const Main = () => {
 
   return (
     <>
-      <p className="text-center text-bold text-2xl mb-5">Platforms</p>
+      <Link
+        to="/platforms"
+        className="flex justify-center text-bold text-2xl mb-5"
+      >
+        Platforms
+      </Link>
       {platforms.length === 0 ? (
         <div className="bg-white flex justify-center items-center gap-4 shadow rounded container md:w-4/5 m-auto text-center font-bold p-3">
           <p>You don't have any platform</p>
@@ -60,7 +66,12 @@ const Main = () => {
         </div>
       )}
 
-      <p className="text-center text-bold text-2xl my-5">Vehicles</p>
+      <Link
+        to="/vehicles"
+        className="flex justify-center text-bold text-2xl m-5"
+      >
+        Vehicles
+      </Link>
       {vehicles.length === 0 ? (
         <div className="bg-white flex justify-center items-center gap-4 shadow rounded container md:w-4/5 m-auto text-center font-bold p-3">
           <p>You don't have any vehicle</p>
@@ -81,7 +92,12 @@ const Main = () => {
         </div>
       )}
 
-      <p className="text-center text-bold text-2xl my-5">Travels</p>
+      <Link
+        to="/travels"
+        className="flex justify-center text-bold text-2xl m-5"
+      >
+        Travels
+      </Link>
       {travels.length === 0 ? (
         <div className="bg-white flex justify-center items-center gap-4 shadow rounded container md:w-4/5 m-auto text-center font-bold p-3">
           <p>You don't have any travel</p>
@@ -108,11 +124,19 @@ const Main = () => {
             <p className="font-bold text-center w-full">Total</p>
           </div>
           <div className=" m-auto justify-between">
-            {travels.map((travel) => (
+            {travels.slice(0, 5).map((travel) => (
               <div key={travel._id} className="bg-white shadow rounded">
                 <TravelList travel={travel} key={travel._id} />
               </div>
             ))}
+            {travels.length >= 5 && (
+              <Link
+                to="/travels"
+                className="bg-white flex mt-2 shadow rounded p-1 justify-center font-bold"
+              >
+                View more trips...
+              </Link>
+            )}
           </div>
         </>
       )}
