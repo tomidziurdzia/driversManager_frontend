@@ -37,7 +37,7 @@ const Main = () => {
           <p>You don't have any vehicle</p>
         </div>
       ) : (
-        <div className="flex container mx-auto justify-between">
+        <div className="flex-col md:flex-row flex container m-auto justify-between">
           {vehicles.map((vehicle) => (
             <PreviewVehicle vehicle={vehicle} key={vehicle._id} />
           ))}
