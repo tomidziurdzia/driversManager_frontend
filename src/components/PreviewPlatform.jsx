@@ -34,13 +34,17 @@ const PreviewPlatform = ({ platform }) => {
   const totalEarnings = netFare + tips + promotions;
 
   return (
-    <div className="bg-white shadow rounded m-auto flex-1 mx-6 h-auto">
-      <Link to={`/platform/${platform._id}`}>
-        <p className="font-bold text-xl text-center border-b-2 py-2 w-full">
-          {platform.name}
-        </p>
+    <div className="bg-white shadow rounded m-auto flex-1 mx-6 h-auto mb-4 md:mb-0">
+      <Link
+        to={`/platform/${platform._id}`}
+        className="font-bold text-xl text-center border-b-2 p-2 w-full flex justify-between md:justify-center"
+      >
+        <p>{platform.name}</p>
+        <span className="md:hidden font-bold text-lg">
+          Total: {formatearCantidad(totalEarnings - totalExpenseLt)}
+        </span>
       </Link>
-      <div className="flex p-2 gap-3 justify-center">
+      <div className="flex p-2 gap-3 md:justify-center justify-between">
         <div>
           <p className="font-bold mt-4">Total KM:</p>
           <p className="font-bold mt-4">Total Liters:</p>
@@ -55,7 +59,8 @@ const PreviewPlatform = ({ platform }) => {
           <p className="font-bold mt-4">{formatearCantidad(totalExpenseLt)}</p>
         </div>
       </div>
-      <div className="p-4 border-t-4 text-center">
+
+      <div className="p-4 border-t-4 text-center hidden md:block">
         <p className="font-bold text-xl">
           Total: {formatearCantidad(totalEarnings - totalExpenseLt)}
         </p>

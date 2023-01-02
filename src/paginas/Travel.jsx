@@ -5,7 +5,7 @@ import ModalTravelConfirm from "../components/ModalTravelConfirm";
 import ModalTravelForm from "../components/ModalTravelForm";
 import Spinner from "../components/Spinner";
 import { formatearCantidad } from "../helpers/formatearCantidad";
-import { formatearFecha } from "../helpers/formatearFecha";
+import { fechaCorta, formatearFecha } from "../helpers/formatearFecha";
 import { viewPlatforms } from "../store/platform/thunks";
 import { viewTravel } from "../store/travel/thunks";
 import { onModalDelete, onModalForm } from "../store/travel/travelSlice";
@@ -43,9 +43,13 @@ const Travel = () => {
   return (
     <div className="bg-white shadow rounded container m-auto">
       <div className="flex px-4">
-        <div className="w-20"></div>
+        <div className="w-20 hidden md:flex"></div>
         <p className="font-bold text-center w-full py-2">
-          Travel: {formatearFecha(travel?.date)}
+          Travel:{" "}
+          <span className="hidden md:block">
+            {formatearFecha(travel?.date)}
+          </span>
+          <span>{fechaCorta(travel?.date)}</span>
         </p>
         <div className="flex w-20 justify-between">
           <button type="button" onClick={handleClick}>
@@ -82,58 +86,70 @@ const Travel = () => {
           </button>
         </div>
       </div>
-      <div className="flex border-b p-2 bg-gray-500 text-white">
-        <p className="font-bold text-center w-full">Hours</p>
-        <p className="font-bold text-center w-full">Trips</p>
-        <p className="font-bold text-center w-full">Net Fare</p>
-        <p className="font-bold text-center w-full">Promotions</p>
-        <p className="font-bold text-center w-full">Tips</p>
+
+      <div className="grid md:block grid-cols-2 justify-items-center w-4/5 m-auto md:w-full">
+        <div className="md:flex md:flex-row md:border-b md:p-2 w-full md:bg-gray-500 md:text-white">
+          <p className="font-bold mb-1 md:text-center w-full">Hours</p>
+          <p className="font-bold mb-1 md:text-center w-full">Trips</p>
+          <p className="font-bold mb-1 md:text-center w-full">Net Fare</p>
+          <p className="font-bold mb-1 md:text-center w-full">Promotions</p>
+          <p className="font-bold mb-1 md:text-center w-full">Tips</p>
+        </div>
+
+        <div className="md:flex w-2/3 md-full md:text-center text-end">
+          <p className="w-full mb-1 md:py-2 md:text-center">{travel?.hours}</p>
+          <p className="w-full mb-1 md:py-2 md:text-center">{travel?.trips}</p>
+          <p className="w-full mb-1 md:py-2 md:text-center">
+            {formatearCantidad(travel?.netFare)}
+          </p>
+          <p className="w-full md:py-2 md:text-center">
+            {formatearCantidad(travel?.promotions)}
+          </p>
+          <p className="w-full md:py-2 md:text-center">
+            {formatearCantidad(travel?.tips)}
+          </p>
+        </div>
       </div>
 
-      <div className="flex">
-        <p className="w-full py-2 text-center">{travel?.hours}</p>
-        <p className="w-full py-2 text-center">{travel?.trips}</p>
-        <p className="w-full py-2 text-center">
-          {formatearCantidad(travel?.netFare)}
-        </p>
-        <p className="w-full py-2 text-center">
-          {formatearCantidad(travel?.promotions)}
-        </p>
-        <p className="w-full py-2 text-center">
-          {formatearCantidad(travel?.tips)}
-        </p>
+      <div className="grid md:block grid-cols-2 justify-items-center w-4/5 m-auto md:w-full">
+        <div className="md:flex md:flex-row md:border-b md:p-2 w-full md:bg-gray-500 md:text-white">
+          <p className="font-bold mb-1 md:text-center w-full">Vehicle</p>
+          <p className="font-bold mb-1 md:text-center w-full">Platform</p>
+          <p className="font-bold mb-1 md:text-center w-full">Km</p>
+          <p className="font-bold mb-1 md:text-center w-full">Liters</p>
+          <p className="font-bold mb-1 md:text-center w-full">Price Liter</p>
+        </div>
+        <div className="md:flex w-2/3 md-full md:text-center text-end">
+          <p className="w-full mb-1 md:py-2 md:text-center">
+            {travel.vehicle?.patent}
+          </p>
+          <p className="w-full mb-1 md:py-2 md:text-center">
+            {travel.platform?.name}
+          </p>
+          <p className="w-full mb-1 md:py-2 md:text-center">{travel?.km}</p>
+          <p className="w-full mb-1 md:py-2 md:text-center">{liters}</p>
+          <p className="w-full mb-1 md:py-2 md:text-center">
+            {formatearCantidad(travel?.priceLiter)}
+          </p>
+        </div>
       </div>
-      <div className="flex border-b p-2 bg-gray-500 text-white">
-        <p className="font-bold  py-2 text-center w-full">Vehicle</p>
-        <p className="font-bold text-center w-full">Platform</p>
-        <p className="font-bold text-center w-full">Km</p>
-        <p className="font-bold text-center w-full">Liters</p>
-        <p className="font-bold text-center w-full">Price Liter</p>
-      </div>
-      <div className="flex">
-        <p className="w-full py-2 text-center">{travel.vehicle?.patent}</p>
-        <p className="w-full py-2 text-center">{travel.platform?.name}</p>
-        <p className="w-full py-2 text-center">{travel?.km}</p>
-        <p className="w-full py-2 text-center">{liters}</p>
-        <p className="w-full py-2 text-center">
-          {formatearCantidad(travel?.priceLiter)}
-        </p>
-      </div>
-      <div className="border-t-4 border-gray-600 pt-4 pb-2 flex">
-        <p className="font-bold text-center w-full">Subtotal Earnings</p>
-        <p className="font-bold text-center w-full">Subtotal Expenses</p>
-        <p className="font-bold text-center w-full">Total</p>
-      </div>
-      <div className="flex pb-2">
-        <p className="w-full pb-2 text-center font-bold">
-          {formatearCantidad(subtotalEarnings)}
-        </p>
-        <p className="w-full py-2 text-center font-bold">
-          {formatearCantidad(subtotalExpenses)}
-        </p>
-        <p className="w-full py-2 text-center font-bold text-xl">
-          {formatearCantidad(total)}
-        </p>
+      <div className="mt-4 grid md:block border-t-4 border-gray-600 md:border-none grid-cols-2">
+        <div className="md:border-t-4 border-gray-600 pt-4 pb-2 flex flex-col md:flex-row">
+          <p className="font-bold py-2 text-center w-full">Subtotal Earnings</p>
+          <p className="font-bold py-2 text-center w-full">Subtotal Expenses</p>
+          <p className="font-bold py-2 text-center w-full">Total</p>
+        </div>
+        <div className="flex pb-2 pt-4 md:pt-0 flex-col md:flex-row">
+          <p className="w-full pb-2 text-center font-bold">
+            {formatearCantidad(subtotalEarnings)}
+          </p>
+          <p className="w-full py-2 text-center font-bold">
+            {formatearCantidad(subtotalExpenses)}
+          </p>
+          <p className="w-full py-2 text-center font-bold text-xl">
+            {formatearCantidad(total)}
+          </p>
+        </div>
       </div>
       <ModalTravelForm />
       <ModalTravelConfirm />

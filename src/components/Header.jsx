@@ -14,27 +14,26 @@ const Header = () => {
         <Link to="/">
           <h1 className="text-2xl font-black">Drivers Manager</h1>
         </Link>
-        {window.innerWidth < 400 ? (
+        <div className="md:hidden">
           <MenuDropdown />
-        ) : (
-          <div className="flex items-center gap-4">
-            <Link to="/travels" className="font-bold">
-              Travels
-            </Link>
-            <Link to="/platforms" className="font-bold">
-              Platforms
-            </Link>
-            <Link to="/vehicles" className="font-bold">
-              Vehicles
-            </Link>
-            <button
-              onClick={handleClick}
-              className="text-white text-sm bg-gray-400 p-2 rounded-md font-bold"
-            >
-              Logout
-            </button>
-          </div>
-        )}
+        </div>
+        <div className="md:flex items-center gap-4 hidden">
+          <Link to="/travels" className="font-bold">
+            Travels
+          </Link>
+          <Link to="/platforms" className="font-bold">
+            Platforms
+          </Link>
+          <Link to="/vehicles" className="font-bold">
+            Vehicles
+          </Link>
+          <button
+            onClick={handleClick}
+            className="text-white text-sm bg-gray-400 p-2 rounded-md font-bold"
+          >
+            Logout
+          </button>
+        </div>
       </div>
     </header>
   );

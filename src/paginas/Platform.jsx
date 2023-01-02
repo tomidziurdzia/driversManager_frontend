@@ -44,7 +44,7 @@ const Platform = () => {
   return (
     <div className="bg-white shadow rounded container m-auto">
       <div className="border-b p-5 flex justify-between">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center md:gap-2 gap-4">
           <h2 className="text-2xl font-bold ">{platform.name}</h2>
           <button type="button" onClick={handleClick}>
             <svg
@@ -85,13 +85,14 @@ const Platform = () => {
         <button
           type="button"
           onClick={handleModalTravel}
-          className="font-bold border border-black py-2 px-3 rounded-lg shadow bg-black text-white hover:cursor-pointer hover:bg-white hover:text-black transition-colors"
+          className="font-bold border border-black md:py-2 py-1 px-3 md:px-3 rounded-full md:rounded-lg shadow bg-black text-white hover:cursor-pointer hover:bg-white hover:text-black transition-colors"
         >
-          New Travel
+          <span className="hidden md:flex">New Travel</span>
+          <span className="md:hidden flex text-2xl">+</span>
         </button>
         <ModalTravelForm idPlatform={id} />
       </div>
-      <div className="flex border-b p-1 bg-gray-500 text-white">
+      <div className="hidden md:flex border-b p-1 bg-gray-500 text-white">
         <p className="font-bold text-center w-full">Date</p>
         <p className="font-bold text-center w-full">Vehicle</p>
         <p className="font-bold text-center w-full">Hours</p>
