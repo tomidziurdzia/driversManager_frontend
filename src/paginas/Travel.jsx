@@ -96,7 +96,7 @@ const Travel = () => {
           <p className="font-bold mb-1 md:text-center w-full">Tips</p>
         </div>
 
-        <div className="md:flex w-2/3 md-full md:text-center text-end">
+        <div className="md:flex w-2/3 md:w-full md:text-center text-end">
           <p className="w-full mb-1 md:py-2 md:text-center">{travel?.hours}</p>
           <p className="w-full mb-1 md:py-2 md:text-center">{travel?.trips}</p>
           <p className="w-full mb-1 md:py-2 md:text-center">
@@ -119,7 +119,7 @@ const Travel = () => {
           <p className="font-bold mb-1 md:text-center w-full">Liters</p>
           <p className="font-bold mb-1 md:text-center w-full">Price Liter</p>
         </div>
-        <div className="md:flex w-2/3 md-full md:text-center text-end">
+        <div className="md:flex w-2/3 md:w-full md:text-center text-end">
           <p className="w-full mb-1 md:py-2 md:text-center">
             {travel.vehicle?.patent}
           </p>

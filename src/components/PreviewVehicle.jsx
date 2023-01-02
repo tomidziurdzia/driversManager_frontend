@@ -1,25 +1,13 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { viewTravels } from "../store/travel/thunks";
 
 const PreviewVehicle = ({ vehicle }) => {
-  const dispatch = useDispatch();
-  const { travels } = useSelector((state) => state.travel);
-
-  useEffect(() => {
-    dispatch(viewTravels());
-  }, []);
-
-  const vehicleId = travels.map((vh) => vh.vehicle._id);
-  console.log(vehicleId);
   console.log(vehicle);
+  const travels = vehicle.travels.map((trip) => trip.km);
 
-  const resultado = vehicleId.filter((id) => id._id === vehicle._id);
-  console.log(resultado);
+  const travelsKm = travels.reduce((total, km) => km + total, 0);
 
   return (
-    <div className="bg-white shadow rounded flex-1 h-auto mb-4 md:mb-0">
+    <div className="bg-white shadow rounded flex-1 md:mx-2  h-auto mb-4 md:mb-0">
       <Link
         to={`/vehicle/${vehicle._id}`}
         className="font-bold text-xl text-center border-b-2 p-2 w-full flex justify-between md:justify-center"
@@ -32,9 +20,9 @@ const PreviewVehicle = ({ vehicle }) => {
           <p className="font-bold mt-4">Total KM:</p>
           <p className="font-bold mt-4">Total Trips:</p>
         </div>
-        <div>
-          <p className="font-bold mt-4">Total KM:</p>
-          <p className="font-bold mt-4">Total Trips:</p>
+        <div className="text-end">
+          <p className="font-bold mt-4">{travelsKm}</p>
+          <p className="font-bold mt-4">{travels.length}</p>
         </div>
       </div>
     </div>
