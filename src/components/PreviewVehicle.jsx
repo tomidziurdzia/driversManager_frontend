@@ -1,19 +1,22 @@
 import { Link } from "react-router-dom";
 
 const PreviewVehicle = ({ vehicle }) => {
-  console.log(vehicle);
   const travels = vehicle.travels.map((trip) => trip.km);
 
   const travelsKm = travels.reduce((total, km) => km + total, 0);
 
   return (
-    <div className="bg-white shadow rounded flex-1 md:mx-2  h-auto mb-4 md:mb-0">
+    <div className="bg-white shadow rounded flex-1 md:mx-2 max-w-md h-auto mb-4 md:mb-0">
       <Link
         to={`/vehicle/${vehicle._id}`}
         className="font-bold text-xl text-center border-b-2 p-2 w-full flex justify-between md:justify-center"
       >
-        <p>{vehicle.model}</p>
-        <span className="md:hidden font-bold text-lg">{vehicle.patent}</span>
+        {vehicle.model === "" ? <></> : <p>{vehicle.model}</p>}
+        {vehicle.model === "" ? (
+          <span className="font-bold text-lg">{vehicle.patent}</span>
+        ) : (
+          <></>
+        )}
       </Link>
       <div className="flex p-2 gap-3 md:justify-center justify-between">
         <div>

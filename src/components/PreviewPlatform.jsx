@@ -34,7 +34,7 @@ const PreviewPlatform = ({ platform }) => {
   const totalEarnings = netFare + tips + promotions;
 
   return (
-    <div className="bg-white shadow rounded flex-1 md:mx-2 h-auto mb-4 md:mb-0">
+    <div className="bg-white shadow rounded flex-1 max-w-md md:mx-2 h-auto mb-4 md:mb-0">
       <Link
         to={`/platform/${platform._id}`}
         className="font-bold text-xl text-center border-b-2 p-2 w-full flex justify-between md:justify-center"
