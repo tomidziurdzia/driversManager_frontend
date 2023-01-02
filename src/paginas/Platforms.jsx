@@ -28,7 +28,7 @@ const Platforms = () => {
           onClick={handleClick}
           className="font-bold border border-black py-2 px-3 rounded-lg shadow bg-black text-white hover:cursor-pointer hover:bg-white hover:text-black transition-colors"
         >
-          New Platform
+          New
         </button>
         <ModalPlatformForm />
       </div>

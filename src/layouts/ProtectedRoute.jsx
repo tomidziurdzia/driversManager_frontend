@@ -12,8 +12,8 @@ const ProtectedRoute = () => {
   return (
     <div>
       <Header />
-      <div className="md: flex m-auto">
-        <main className="flex-1 mt-5">
+      <div className="md:flex p-4 m-auto">
+        <main className="flex-1">
           <Routes>
             <Route path="/" index element={<Main />} />
             <Route path="/travels" element={<Travels />} />
