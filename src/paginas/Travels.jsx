@@ -31,13 +31,13 @@ const Travels = () => {
           onClick={handleClick}
           className="nt-bold border border-black py-2 px-3 rounded-lg shadow bg-black text-white hover:cursor-pointer hover:bg-white hover:text-black transition-colors"
         >
-          New Travel
+          New
         </button>
         <ModalTravelForm />
       </div>
 
       <>
-        <div className="flex border-b p-1 bg-gray-500 text-white">
+        <div className="hidden sm:flex border-b p-1 bg-gray-500 text-white">
           <p className="font-bold text-center w-full">Date</p>
           <p className="font-bold text-center w-full">Platform</p>
           <p className="font-bold text-center w-full">Vehicle</p>
