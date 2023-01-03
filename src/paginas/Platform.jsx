@@ -12,6 +12,7 @@ import { viewPlatform, viewPlatforms } from "../store/platform/thunks";
 import { viewTravels } from "../store/travel/thunks";
 import { viewVehicles } from "../store/vehicle/thunks";
 import Pagination from "../components/Pagination";
+import FilterDate from "../components/FilterDate";
 
 const Platform = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,9 @@ const Platform = () => {
   const { id } = useParams();
 
   const { platform, loading } = useSelector((state) => state.platform);
-  const { travels: travelsPlatform } = useSelector((state) => state.travel);
+  const { travels: travelsPlatform, travelsFilter } = useSelector(
+    (state) => state.travel
+  );
   const { page, travelPerPage } = useSelector((state) => state.filter);
 
   const indexPage = page * travelPerPage;
@@ -86,6 +89,7 @@ const Platform = () => {
           <ModalPlatformForm />
           <ModalPlatformConfirm />
         </div>
+        <FilterDate />
 
         <button
           type="button"
@@ -109,7 +113,7 @@ const Platform = () => {
       </div>
       <div>
         {platform.travels?.length ? (
-          platform.travels
+          travelsFilter
             .slice(indexLastPage, indexPage)
             .map((travel) => <TravelList key={travel._id} travel={travel} />)
         ) : (

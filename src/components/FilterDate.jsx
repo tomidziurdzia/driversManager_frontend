@@ -3,15 +3,11 @@ import { useDispatch } from "react-redux";
 import { viewTravels } from "../store/travel/thunks";
 import { filterTravelsDates } from "../store/travel/travelSlice";
 
-const FilterDate = ({ travels }) => {
+const FilterDate = () => {
   const dispatch = useDispatch();
   const [from, setFrom] = useState("");
   const [until, setUntil] = useState("");
 
-  // const filterTravels = travels.filter((travel) => {
-  //   const date = travel.date;
-  //   return date >= from && date <= until;
-  // });
   useEffect(() => {
     dispatch(viewTravels());
   }, []);

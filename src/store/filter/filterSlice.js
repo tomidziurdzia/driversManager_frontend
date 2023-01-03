@@ -4,7 +4,7 @@ export const filterSlice = createSlice({
   name: "filter",
   initialState: {
     page: 1,
-    travelPerPage: 5,
+    travelPerPage: 15,
   },
   reducers: {
     pageTravels: (state, action) => {

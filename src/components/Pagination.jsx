@@ -1,11 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { setPage } from "../store/filter/thunks";
 
 const Pagination = () => {
-  const { page } = useSelector((state) => state.filter);
+  const { page, travelPerPage } = useSelector((state) => state.filter);
   const { travels } = useSelector((state) => state.travel);
+  const { platform } = useSelector((state) => state.platform);
 
-  const lastPage = Math.ceil(travels.length / 5);
+  const params = useParams();
+
+  const lastPage = params["*"].includes("platform")
+    ? Math.ceil(platform.travels?.length / travelPerPage)
+    : Math.ceil(travels?.length / travelPerPage);
 
   const dispatch = useDispatch();
 
