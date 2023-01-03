@@ -6,9 +6,7 @@ import {
   updateTravel,
   deleteTravel,
   onModalForm,
-  onModalDelete,
   onError,
-  onLoading,
 } from "./travelSlice";
 
 export const newTravel = (travel) => {

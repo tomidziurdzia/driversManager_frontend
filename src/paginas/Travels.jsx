@@ -12,7 +12,9 @@ import { onModalForm } from "../store/travel/travelSlice";
 import { viewVehicles } from "../store/vehicle/thunks";
 
 const Travels = () => {
-  const { travels, loading } = useSelector((state) => state.travel);
+  const { travels, travelsFilter, loading } = useSelector(
+    (state) => state.travel
+  );
   const { page, travelPerPage } = useSelector((state) => state.filter);
 
   const indexPage = page * travelPerPage;
@@ -33,7 +35,7 @@ const Travels = () => {
     <div className="bg-white shadow rounded container m-auto">
       <div className="border-b p-5 flex justify-between">
         <h2 className="text-2xl font-bold ">Travels</h2>
-        <FilterDate travels={travels} />
+        <FilterDate />
         <button
           type="button"
           onClick={handleClick}
@@ -57,7 +59,7 @@ const Travels = () => {
           <p className="font-bold text-center w-full">Total</p>
         </div>
         {travels?.length ? (
-          travels
+          travelsFilter
             .slice(indexLastPage, indexPage)
             .map((travel) => <TravelList key={travel._id} travel={travel} />)
         ) : (

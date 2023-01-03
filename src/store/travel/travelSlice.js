@@ -4,6 +4,7 @@ export const travelSlice = createSlice({
   name: "travel",
   initialState: {
     travels: [],
+    travelsFilter: [],
     travel: {},
     modalForm: false,
     modalDelete: false,
@@ -17,8 +18,18 @@ export const travelSlice = createSlice({
 
     viewAllTravels: (state, action) => {
       state.travels = action.payload;
+      state.travelsFilter = action.payload;
       state.travel = {};
     },
+
+    filterTravelsDates: (state, action) => {
+      // console.log(action.payload);
+      state.travelsFilter = state.travelsFilter.filter((travel) => {
+        const date = travel.date;
+        return date >= action.payload.from && date <= action.payload.until;
+      });
+    },
+
     viewOneTravel: (state, action) => {
       state.travel = action.payload;
     },
@@ -61,6 +72,7 @@ export const travelSlice = createSlice({
 export const {
   addTravel,
   viewAllTravels,
+  filterTravelsDates,
   viewOneTravel,
   updateTravel,
   deleteTravel,

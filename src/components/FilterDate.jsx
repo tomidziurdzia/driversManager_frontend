@@ -1,20 +1,24 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { viewTravel, viewTravels } from "../store/travel/thunks";
+import { viewTravels } from "../store/travel/thunks";
+import { filterTravelsDates } from "../store/travel/travelSlice";
 
 const FilterDate = ({ travels }) => {
   const dispatch = useDispatch();
   const [from, setFrom] = useState("");
   const [until, setUntil] = useState("");
 
-  const filterTravels = travels.filter((travel) => {
-    const date = travel.date;
-    return date >= from && date <= until;
-  });
-
+  // const filterTravels = travels.filter((travel) => {
+  //   const date = travel.date;
+  //   return date >= from && date <= until;
+  // });
   useEffect(() => {
-    dispatch(viewTravels(filterTravels));
+    dispatch(viewTravels());
   }, []);
+
+  const handleClick = () => {
+    dispatch(filterTravelsDates({ from, until }));
+  };
 
   return (
     <div className="flex gap-4">
@@ -37,7 +41,10 @@ const FilterDate = ({ travels }) => {
           onChange={(e) => setUntil(e.target.value)}
         />
       </div>
-      <button className="border border-black px-1 rounded-lg shadow bg-black text-white hover:cursor-pointer hover:bg-white hover:text-black transition-colors">
+      <button
+        onClick={handleClick}
+        className="border border-black px-1 rounded-lg shadow bg-black text-white hover:cursor-pointer hover:bg-white hover:text-black transition-colors"
+      >
         Filter
       </button>
     </div>
