@@ -1,5 +1,4 @@
 import clientAxios from "../../config/clientAxios";
-import { viewAllTravels } from "../travel/travelSlice";
 import {
   addPlatform,
   onError,

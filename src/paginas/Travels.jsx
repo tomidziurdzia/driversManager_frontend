@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import FilterDate from "../components/FilterDate";
 import ModalTravelForm from "../components/ModalTravelForm";
 import Pagination from "../components/Pagination";
 import Spinner from "../components/Spinner";
@@ -12,13 +13,12 @@ import { viewVehicles } from "../store/vehicle/thunks";
 
 const Travels = () => {
   const { travels, loading } = useSelector((state) => state.travel);
+  const { page, travelPerPage } = useSelector((state) => state.filter);
+
+  const indexPage = page * travelPerPage;
+  const indexLastPage = indexPage - travelPerPage;
+
   const dispatch = useDispatch();
-
-  const [page, setPage] = useState(1);
-
-  const travelsPerPage = 5;
-  const totalTravels = travels.length;
-  const totalPages = Math.ceil(totalTravels / travelsPerPage);
 
   useEffect(() => {
     dispatch(viewTravels());
@@ -33,11 +33,11 @@ const Travels = () => {
     <div className="bg-white shadow rounded container m-auto">
       <div className="border-b p-5 flex justify-between">
         <h2 className="text-2xl font-bold ">Travels</h2>
-
+        <FilterDate travels={travels} />
         <button
           type="button"
           onClick={handleClick}
-          className="nt-bold border border-black py-2 px-3 rounded-lg shadow bg-black text-white hover:cursor-pointer hover:bg-white hover:text-black transition-colors"
+          className="font-bold border border-black py-2 px-3 rounded-lg shadow bg-black text-white hover:cursor-pointer hover:bg-white hover:text-black transition-colors"
         >
           New
         </button>
@@ -58,12 +58,8 @@ const Travels = () => {
         </div>
         {travels?.length ? (
           travels
+            .slice(indexLastPage, indexPage)
             .map((travel) => <TravelList key={travel._id} travel={travel} />)
-            // .reverse()
-            .slice(
-              (page - 1) * travelsPerPage,
-              (page - 1) * travelsPerPage + travelsPerPage
-            )
         ) : (
           <div className="text-center py-5 text-lg font-bold">
             Add a new travel
@@ -71,7 +67,7 @@ const Travels = () => {
         )}
       </>
 
-      <Pagination page={page} setPage={setPage} totalPages={totalPages} />
+      <Pagination />
     </div>
   );
 };

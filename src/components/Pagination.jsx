@@ -1,10 +1,20 @@
-const Pagination = ({ page, setPage, totalPages }) => {
+import { useDispatch, useSelector } from "react-redux";
+import { setPage } from "../store/filter/thunks";
+
+const Pagination = () => {
+  const { page } = useSelector((state) => state.filter);
+  const { travels } = useSelector((state) => state.travel);
+
+  const lastPage = Math.ceil(travels.length / 5);
+
+  const dispatch = useDispatch();
+
   const handlePrev = () => {
-    setPage(page - 1);
+    dispatch(setPage(page - 1));
   };
 
   const handleNext = () => {
-    setPage(page + 1);
+    dispatch(setPage(page + 1));
   };
 
   return (
@@ -32,7 +42,7 @@ const Pagination = ({ page, setPage, totalPages }) => {
       <p className="text-xl">{page}</p>
       <button
         onClick={handleNext}
-        disabled={page === totalPages}
+        disabled={page === lastPage ? true : false}
         className="disabled:opacity-10"
       >
         <svg
