@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import ModalPlatformConfirm from "../components/ModalPlatformConfirm";
@@ -11,14 +11,24 @@ import { onModalForm as onModalFormTravel } from "../store/travel/travelSlice";
 import { viewPlatform, viewPlatforms } from "../store/platform/thunks";
 import { viewTravels } from "../store/travel/thunks";
 import { viewVehicles } from "../store/vehicle/thunks";
+import Pagination from "../components/Pagination";
 
 const Platform = () => {
   const dispatch = useDispatch();
+
+  const [page, setPage] = useState(1);
 
   const { id } = useParams();
 
   const { platform, loading } = useSelector((state) => state.platform);
   const { travels: travelsPlatform } = useSelector((state) => state.travel);
+
+  console.log(platform.travels);
+  console.log(travelsPlatform);
+
+  const travelsPerPage = 5;
+  const totalTravels = travelsPlatform.length;
+  const totalPages = Math.ceil(totalTravels / travelsPerPage);
 
   useEffect(() => {
     dispatch(viewPlatform(id));
@@ -104,14 +114,18 @@ const Platform = () => {
       </div>
       <div>
         {platform.travels?.length ? (
-          platform.travels.map((travel) => (
-            <TravelList key={travel._id} travel={travel} />
-          ))
+          platform.travels
+            .map((travel) => <TravelList key={travel._id} travel={travel} />)
+            .slice(
+              (page - 1) * travelsPerPage,
+              (page - 1) * travelsPerPage + travelsPerPage
+            )
         ) : (
           <div className="text-center py-5 text-lg font-bold">
             Add a new travel
           </div>
         )}
+        <Pagination page={page} setPage={setPage} totalPages={totalPages} />
       </div>
     </div>
   );

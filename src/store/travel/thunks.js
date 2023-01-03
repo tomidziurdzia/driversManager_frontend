@@ -27,6 +27,11 @@ export const viewTravels = () => {
   return async (dispatch) => {
     try {
       const { data } = await clientAxios("/travels");
+      data.sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        return dateB - dateA;
+      });
       dispatch(viewAllTravels(data));
     } catch (error) {
       dispatch(onError({ msg: error.response.data.msg, type: true }));

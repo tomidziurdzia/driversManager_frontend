@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ModalTravelForm from "../components/ModalTravelForm";
+import Pagination from "../components/Pagination";
 import Spinner from "../components/Spinner";
 import TravelList from "../components/TravelList";
 import { viewPlatforms } from "../store/platform/thunks";
@@ -11,6 +13,12 @@ import { viewVehicles } from "../store/vehicle/thunks";
 const Travels = () => {
   const { travels, loading } = useSelector((state) => state.travel);
   const dispatch = useDispatch();
+
+  const [page, setPage] = useState(1);
+
+  const travelsPerPage = 5;
+  const totalTravels = travels.length;
+  const totalPages = Math.ceil(totalTravels / travelsPerPage);
 
   useEffect(() => {
     dispatch(viewTravels());
@@ -49,15 +57,21 @@ const Travels = () => {
           <p className="font-bold text-center w-full">Total</p>
         </div>
         {travels?.length ? (
-          travels.map((travel) => (
-            <TravelList key={travel._id} travel={travel} />
-          ))
+          travels
+            .map((travel) => <TravelList key={travel._id} travel={travel} />)
+            // .reverse()
+            .slice(
+              (page - 1) * travelsPerPage,
+              (page - 1) * travelsPerPage + travelsPerPage
+            )
         ) : (
           <div className="text-center py-5 text-lg font-bold">
             Add a new travel
           </div>
         )}
       </>
+
+      <Pagination page={page} setPage={setPage} totalPages={totalPages} />
     </div>
   );
 };

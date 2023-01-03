@@ -124,11 +124,15 @@ const Main = () => {
             <p className="font-bold text-center w-full">Total</p>
           </div>
           <div className=" m-auto justify-between">
-            {travels.slice(0, 5).map((travel) => (
-              <div key={travel._id} className="bg-white shadow rounded">
-                <TravelList travel={travel} key={travel._id} />
-              </div>
-            ))}
+            {travels
+              .map((travel) => (
+                <div key={travel._id} className="bg-white shadow rounded">
+                  <TravelList travel={travel} key={travel._id} />
+                </div>
+              ))
+              // Muestra los ultimos 5 viajes y boton de ver mas
+              // .reverse()
+              .slice(0, 5)}
             {travels.length >= 5 && (
               <Link
                 to="/travels"
