@@ -17,8 +17,8 @@ const FilterDate = () => {
   };
 
   return (
-    <div className="flex gap-4">
-      <div className="flex gap-4 items-center">
+    <div className="flex flex-col md:flex-row m-auto md:m-0 gap-4">
+      <div className="flex justify-between gap-4 items-center">
         <label htmlFor="from">From</label>
         <input
           className="border p-1"
@@ -28,7 +28,7 @@ const FilterDate = () => {
           onChange={(e) => setFrom(e.target.value)}
         />
       </div>
-      <div className="flex gap-4 items-center">
+      <div className="flex justify-between gap-4 items-center">
         <label htmlFor="until">Until</label>
         <input
           className="border p-1"

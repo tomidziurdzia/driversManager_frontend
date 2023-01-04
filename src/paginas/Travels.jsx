@@ -33,17 +33,23 @@ const Travels = () => {
   };
   return (
     <div className="bg-white shadow rounded container m-auto">
-      <div className="border-b p-5 flex justify-between">
+      <div className="border-b p-5 flex  justify-between">
         <h2 className="text-2xl font-bold ">Travels</h2>
-        <FilterDate />
+        <div className="hidden md:flex">
+          <FilterDate />
+        </div>
         <button
           type="button"
           onClick={handleClick}
-          className="font-bold border border-black py-2 px-3 rounded-lg shadow bg-black text-white hover:cursor-pointer hover:bg-white hover:text-black transition-colors"
+          className="font-bold border border-black md:py-2 py-1 px-3 md:px-3 rounded-full md:rounded-lg shadow bg-black text-white hover:cursor-pointer hover:bg-white hover:text-black transition-colors"
         >
-          New
+          <span className="hidden md:flex">New Travel</span>
+          <span className="md:hidden flex text-2xl">+</span>
         </button>
         <ModalTravelForm />
+      </div>
+      <div className="md:hidden py-2 flex m-auto border-b">
+        <FilterDate />
       </div>
 
       <>

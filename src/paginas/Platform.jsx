@@ -89,7 +89,9 @@ const Platform = () => {
           <ModalPlatformForm />
           <ModalPlatformConfirm />
         </div>
-        <FilterDate />
+        <div className="hidden md:flex">
+          <FilterDate />
+        </div>
 
         <button
           type="button"
@@ -100,6 +102,9 @@ const Platform = () => {
           <span className="md:hidden flex text-2xl">+</span>
         </button>
         <ModalTravelForm idPlatform={id} />
+      </div>
+      <div className="md:hidden py-2 flex m-auto border-b">
+        <FilterDate />
       </div>
       <div className="hidden md:flex border-b p-1 bg-gray-500 text-white">
         <p className="font-bold text-center w-full">Date</p>
