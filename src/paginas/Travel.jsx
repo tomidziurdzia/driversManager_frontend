@@ -18,6 +18,7 @@ const Travel = () => {
 
   const { travel, loading } = useSelector((state) => state.travel);
 
+  console.log(travel);
   const liters = Number((travel.km * travel.vehicle?.consume) / 100);
 
   const subtotalEarnings = travel.netFare + travel.tips + travel.promotions;

@@ -19,7 +19,7 @@ export const travelSlice = createSlice({
     viewAllTravels: (state, action) => {
       state.travels = action.payload;
       state.travelsFilter = action.payload;
-      state.travel = {};
+      // state.travel = {};
     },
 
     filterTravelsDates: (state, action) => {

@@ -23,6 +23,7 @@ const Platform = () => {
   const { travels: travelsPlatform, travelsFilter } = useSelector(
     (state) => state.travel
   );
+
   const { page, travelPerPage } = useSelector((state) => state.filter);
 
   const indexPage = page * travelPerPage;
@@ -89,9 +90,6 @@ const Platform = () => {
           <ModalPlatformForm />
           <ModalPlatformConfirm />
         </div>
-        <div className="hidden md:flex">
-          <FilterDate />
-        </div>
 
         <button
           type="button"
@@ -103,9 +101,7 @@ const Platform = () => {
         </button>
         <ModalTravelForm idPlatform={id} />
       </div>
-      <div className="md:hidden py-2 flex m-auto border-b">
-        <FilterDate />
-      </div>
+
       <div className="hidden md:flex border-b p-1 bg-gray-500 text-white">
         <p className="font-bold text-center w-full">Date</p>
         <p className="font-bold text-center w-full">Vehicle</p>
@@ -118,7 +114,7 @@ const Platform = () => {
       </div>
       <div>
         {platform.travels?.length ? (
-          travelsFilter
+          platform.travels
             .slice(indexLastPage, indexPage)
             .map((travel) => <TravelList key={travel._id} travel={travel} />)
         ) : (
