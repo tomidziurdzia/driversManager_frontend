@@ -75,6 +75,11 @@ const Login = () => {
           value="Login"
           className="bg-black text-white border-2 border-black py-3 w-full rounded hover:cursor-pointer hover:bg-white hover:text-black font-bold text-xl transition-colors"
         />
+        <div className="mt-10 text-gray-500 ">
+          <p className="flex justify-center text-2xl">User Demo</p>
+          <p>Email: admin@admin.com</p>
+          <p>Password: admin</p>
+        </div>
       </form>
       <nav>
         <Link
